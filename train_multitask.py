@@ -116,9 +116,13 @@ def empty_fun(x):
     pass
 
 task_order = {}
+count = 0
 for i in range(100):
-    task_order[str(i)] = i * 2
-    task_order[str(i) + '_ft'] = i * 2 + 1
+    task_order[str(i)] = count
+    count += 1
+    if i == 0:
+        task_order[str(i) + '_ft'] = count
+        count+=1
 def exec_block(args, tid):
 
     if task_order[args.starting_tid] <= task_order[tid]:
