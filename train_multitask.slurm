@@ -52,14 +52,13 @@ time python train_multitask.py --jobid $SLURM_JOB_ID \
 --random-classes 0 \
 --overflow 0 \
 --resume 1 \
---starting-tid 1 \
---pretrained-cps ./checkpoint/226429_resnet18/model0_best.pth,./checkpoint/227654_resnet18/model_0_ft_best.pth \
+--starting-tid 0_ft \
+--pretrained-cps ./checkpoint/226429_resnet18/model0_best.pth, \
 --lr 0.1 \
 --weight-decay 0.0005 \
 --epochs 250 \
 --schedule 100 150 200 \
---compression 0.80 \
---growth-rate 0.3 \
+--compression 1.0 \
 --workers 4 \
 --train-batch 64 \
 --ft-lr 0.1 \

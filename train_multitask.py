@@ -33,12 +33,11 @@ parser.add_argument('--increments', type=int, nargs='+', default=[10]*10)
 parser.add_argument('--add-bn-prev', type=str2bool, nargs='?', default=False)
 parser.add_argument('--add-bn-next', type=str2bool, nargs='?', default=True)
 
-parser.add_argument('--compression', default=0.95, type=float)
-parser.add_argument('--growth-rate', default=0.1, type=float)
+parser.add_argument('--compression', default=1.0, type=float)
 
 parser.add_argument('--resume', type=str2bool, nargs='?', default=False)
-parser.add_argument('--starting-tid', type=str, default='1', help='<tid> or <tid_ft>')
-parser.add_argument('--pretrained-cps', type=str, default='./checkpoint/226429_resnet18/model0_best.pth,./checkpoint/227651_resnet18/model_0_ft_best.pth')
+parser.add_argument('--starting-tid', type=str, default='0_ft', help='<tid> or <tid_ft>')
+parser.add_argument('--pretrained-cps', type=str, default='./checkpoint/226429_resnet18/model0_best.pth,')
 
 parser.add_argument('-d', '--dataset', default='cifar100', type=str)
 parser.add_argument('--data-path', default='../../data/CIFAR', type=str)
@@ -223,7 +222,7 @@ def main():
     for i in range(1, len(args.increments)):
 
         # Add new task parameters to the model
-        mt_model.add_task(copy_from=0, growth_rate=args.growth_rate, add_bn_prev_list=args.add_bn_prev, add_bn_next_list=args.add_bn_next, num_classes=args.increments[i])
+        mt_model.add_task(copy_from=0, growth_rate=0, add_bn_prev_list=args.add_bn_prev, add_bn_next_list=args.add_bn_next, num_classes=args.increments[i])
         mt_model.set_task_id(i)
         mt_model.cuda()
 
